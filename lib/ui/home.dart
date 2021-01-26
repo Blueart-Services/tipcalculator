@@ -21,7 +21,11 @@ class _TipCalculatorState extends State<TipCalculator> {
 
   @override
   Widget build(BuildContext context) {
-    totalPerPerson = (totalTip + _billAmount) / _personCounter;
+     _billAmount < 0 || _billAmount.toString().isEmpty || _billAmount == null
+        ? print(totalTip.toString())
+        : totalTip = (_billAmount * _tipPercentage) / 100;
+        totalPerPerson = (totalTip + _billAmount) / _personCounter;
+
     double mediaHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -94,6 +98,7 @@ class _TipCalculatorState extends State<TipCalculator> {
 
   //Tip Percentage Method
   buildTipPercentageSlider() {
+
     return Column(
       children: [
         Text(
@@ -119,9 +124,8 @@ class _TipCalculatorState extends State<TipCalculator> {
 
 //Tip Value Method
   buildTipValue() {
-    _billAmount < 0 || _billAmount.toString().isEmpty || _billAmount == null
-        ? print(totalTip.toString())
-        : totalTip = (_billAmount * _tipPercentage) / 100;
+
+   
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       //Split Text
       Text(
@@ -141,6 +145,7 @@ class _TipCalculatorState extends State<TipCalculator> {
 
 //Tip Splitter Method
   buildTipSplitter() {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -200,6 +205,7 @@ class _TipCalculatorState extends State<TipCalculator> {
 
 //Bill Amount Textfield Method
   buildBillAmountTextField() {
+
     return TextField(
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       style: TextStyle(color: txtColor),
